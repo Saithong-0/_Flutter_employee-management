@@ -1,26 +1,21 @@
-// services/database_services.dart - บริการเชื่อมต่อกับ API backend
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import '../models/employees.dart';
 
 class DatabaseService {
-  // URL ของ API backend
-  // เปลี่ยนเป็น IP หรือ domain ที่ถูกต้องในการใช้งานจริง
   static const String _baseUrl =
       'Your Url'; // สำหรับ Android Emulator
   // static const String _baseUrl = 'Your Url'; // สำหรับ iOS Simulator
   // static const String _baseUrl = 'Your Url'; // สำหรับ Production
 
-  // สร้าง headers สำหรับคำขอ HTTP
+  
   Map<String, String> _headers() {
     return {'Content-Type': 'application/json', 'Accept': 'application/json'};
   }
 
-  // จัดการ response และ errors จาก API
   dynamic _handleResponse(http.Response response) {
     if (response.statusCode >= 200 && response.statusCode < 300) {
-      // ถ้า response body ว่างเปล่า
       if (response.body.isEmpty) {
         return null;
       }
@@ -32,13 +27,12 @@ class DatabaseService {
     }
   }
 
-  // ดึงข้อมูลพนักงานทั้งหมด พร้อมตัวกรองที่เป็นตัวเลือก
+  // ดึงข้อมูลพนักงานและแผนกทั้งหมด
   Future<List<Employee>> getEmployees({
     String? searchTerm,
     String? department,
   }) async {
     try {
-      // สร้าง query parameters สำหรับการกรอง
       final queryParams = <String, String>{};
       if (searchTerm != null && searchTerm.isNotEmpty) {
         queryParams['searchTerm'] = searchTerm;
@@ -47,17 +41,13 @@ class DatabaseService {
   queryParams['department'] = department;
 }
 
-
-      // สร้าง URL พร้อม query parameters
       final uri = Uri.parse(
         '$_baseUrl/employee',
       ).replace(queryParameters: queryParams);
 
-      // ทำคำขอ HTTP
       final response = await http.get(uri, headers: _headers());
       final data = _handleResponse(response) as List<dynamic>;
 
-      // แปลงข้อมูลเป็นรายการ Employee
       return data.map((item) => Employee.fromMap(item)).toList();
     } catch (e) {
       debugPrint('เกิดข้อผิดพลาดในการดึงข้อมูลพนักงาน: $e');
