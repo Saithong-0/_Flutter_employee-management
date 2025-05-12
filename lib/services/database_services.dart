@@ -8,9 +8,9 @@ class DatabaseService {
   // URL ของ API backend
   // เปลี่ยนเป็น IP หรือ domain ที่ถูกต้องในการใช้งานจริง
   static const String _baseUrl =
-      'http://10.0.2.2:3000/api'; // สำหรับ Android Emulator
-  // static const String _baseUrl = 'http://localhost:3000/api'; // สำหรับ iOS Simulator
-  // static const String _baseUrl = 'https://your-production-api.com/api'; // สำหรับ Production
+      'Your Url'; // สำหรับ Android Emulator
+  // static const String _baseUrl = 'Your Url'; // สำหรับ iOS Simulator
+  // static const String _baseUrl = 'Your Url'; // สำหรับ Production
 
   // สร้าง headers สำหรับคำขอ HTTP
   Map<String, String> _headers() {
