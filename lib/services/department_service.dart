@@ -1,4 +1,3 @@
-// services/department_service.dart
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
@@ -27,12 +26,10 @@ class Department {
 }
 
 class DepartmentService {
-  // URL ของ API backend
   // ใช้ URL เดียวกับใน database_service.dart
-  static const String _baseUrl = 'http://10.0.2.2:3000/api'; // สำหรับ Android Emulator
+  static const String _baseUrl = 'Your api'; // สำหรับ Android Emulator
   // static const String _baseUrl = 'http://localhost:3000/api'; // สำหรับ iOS Simulator
-
-  // สร้าง headers สำหรับคำขอ HTTP
+  
   Map<String, String> _headers() {
     return {
       'Content-Type': 'application/json',
@@ -40,10 +37,8 @@ class DepartmentService {
     };
   }
 
-  // จัดการ response และ errors จาก API
   dynamic _handleResponse(http.Response response) {
     if (response.statusCode >= 200 && response.statusCode < 300) {
-      // ถ้า response body ว่างเปล่า
       if (response.body.isEmpty) {
         return null;
       }
