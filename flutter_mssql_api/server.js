@@ -12,11 +12,11 @@ app.use(bodyParser.json());
 
 
 const dbConfig = {
-  user: 'saithong',
-  password: '123456',
-  server: 'DESKTOP-3GCRNVU',
-  database: 'Employee_Management',
-  port: 1433,
+  user: 'Your user name ',
+  password: 'Your password',
+  server: 'Your server name',
+  database: 'Your DB',
+  port: 'Your port',
   options: {
     encrypt: true,
     trustServerCertificate: true
